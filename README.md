@@ -56,7 +56,15 @@ Attend: Decide which parts are more informative given a query, and get problem s
 Predict: spaCy uses a multi layer perceptron for inference.
 
 
-# Data presentation
+# Results
+
+Model Performance
+
+- Model is able to identify full names of the person from text where spacy large model extracts partial names.
+- Some of the locations present were not part of the training data, which resulted in non extraction on test data but those locations
+    are detected by spacy large model.
+- There are several data points which overlaps the positions, which is possible cause for False postives.
+- Many full text are speaded over multiple lines which results in poor data labelling and affects model accuracy.
 
 
 
