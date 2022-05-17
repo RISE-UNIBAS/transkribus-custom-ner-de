@@ -11,6 +11,8 @@ Information on present files/folder in this folder.
 - File : requirements.txt - Python libraries dependency file to create virtual environment.
 - File : Submission_Custome_NER_From_XML.ipynb - Jupyter Notebook containing all the code.
 - File : train_custom_spacy_ner.py - Python script to train NER model.
+
+
 Model Performance
 
 - Model is able to identify full names of the person from text where spacy large model extracts partial names.
