@@ -1,5 +1,5 @@
 # Spacy_Model_Zionistenkongress
-Named Entity Recognition for Persons and Locations - Pre-Trained Spacy Model &amp; Own Model
+Named Entity Recognition for Persons and Locations - Pre-Trained Spacy Model &amp; Own Model using Python
 
 
 
@@ -36,7 +36,24 @@ This output file was then inserted into the python script, which then parses the
 
 
 # Data analysis
+-The first step was to read the .txt-file (or each .txt-file) into Python using Python Version 3.xxx to process the text and to have a basic identifier that can link any named entities back to the page they appeared on.
 
+-spaCy: the "de_core_news_lg" model is used to parse all the texts and perform a named entity recognition. Every entity tagged as PER, and/or Location (LOC). In addition to that you can use the own created and trained model. The resulting dataframe was saved as a .csv file.
+
+- SpaCy has its own deep learning library called thinc used under the hood for different NLP models.#
+SpaCy uses a deep neural network based on CNN. Specifically for Named Entity Recognition, spacy uses:
+
+A transition based approach borrowed from shift-reduce parsers, which is described in the paper Neural Architectures for Named Entity Recognition.
+
+A framework that's called "Embed. Encode. Attend. Predict".
+
+Embed: Words are embedded using a Bloom filter, which means that word hashes are kept as keys in the embedding dictionary, instead of the word itself. This maintains a more compact embeddings dictionary, with words potentially colliding and ending up with the same vector representations.
+
+Encode: List of words is encoded into a sentence matrix, to take context into account. spaCy uses CNN for encoding.
+
+Attend: Decide which parts are more informative given a query, and get problem specific representations.
+
+Predict: spaCy uses a multi layer perceptron for inference.
 
 
 # Data presentation
