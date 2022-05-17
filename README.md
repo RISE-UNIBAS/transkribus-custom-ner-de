@@ -36,7 +36,7 @@ This output file was then inserted into the python script, which then parses the
 
 
 # Data analysis
--The first step was to read the .txt-file (or each .txt-file) into Python using Python Version 3.xxx to process the text and to have a basic identifier that can link any named entities back to the page they appeared on.
+-The first step was to read the .txt-file (or each .txt-file) into Python using Python Version 3.7.9 to process the text and to have a basic identifier that can link any named entities back to the page they appeared on.
 
 -spaCy: the "de_core_news_lg" model is used to parse all the texts and perform a named entity recognition. Every entity tagged as PER, and/or Location (LOC). In addition to that you can use the own created and trained model. The resulting dataframe was saved as a .csv file.
 
