@@ -65,6 +65,15 @@ Model Performance
     are detected by spacy large model.
 - There are several data points which overlaps the positions, which is possible cause for False postives.
 - Many full text are speaded over multiple lines which results in poor data labelling and affects model accuracy.
+- Accuracy_calculation.py can be used to calculate the precision/recall/f1-score of the custom-trained model and the already pre-trained model by spacy using the large 
+german package and compares those two results
 
 
-
+# Update
+- migrated all the code to spacy 3.3, because model comparison with spacy large model requires latest version.
+- there is minor update in label generation due to version upgrade.
+- Added lists to add persons and locations as a pattern using entity ruler.
+- Added list to ignore words in detection.
+- Added new script to calculate the various scores. First it gives overall scores then it also gives entity wise various scores.
+- Updated the requirements.txt with new library versions.
+- Added Jupyter notebook which covers everything with markdown descriptions.
