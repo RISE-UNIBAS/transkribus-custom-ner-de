@@ -1,0 +1,39 @@
+{
+  "lang":"de",
+  "name":"pipeline",
+  "version":"0.0.0",
+  "spacy_version":">=3.3.0,<3.4.0",
+  "description":"",
+  "author":"",
+  "email":"",
+  "url":"",
+  "license":"",
+  "spacy_git_version":"Unknown",
+  "vectors":{
+    "width":0,
+    "vectors":0,
+    "keys":0,
+    "name":null,
+    "mode":"default"
+  },
+  "labels":{
+    "entity_ruler":[
+
+    ],
+    "ner":[
+      "LOC",
+      "PERSON"
+    ]
+  },
+  "pipeline":[
+    "entity_ruler",
+    "ner"
+  ],
+  "components":[
+    "entity_ruler",
+    "ner"
+  ],
+  "disabled":[
+
+  ]
+}
