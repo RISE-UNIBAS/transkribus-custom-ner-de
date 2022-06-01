@@ -1,5 +1,7 @@
 # Tutorial
 
+
+
 ## Introduction
 
 This document serves as a step-by-step guide to running a Named Entitiy Recogniticon algorithm
@@ -18,21 +20,28 @@ Afterwards, this trained model can be used to analyze texts that have not been s
 Ultimately, the more data these NLP algorithms are fed, the more accurate the text analysis models
 will be.
 
-
-
 ![image](https://user-images.githubusercontent.com/62709221/171058157-3471e2d2-7e34-4c56-bb52-8e91446d9a5b.png)
 
-## Step 1: Prepare document for training using Transkribus Expert Client
+## First step: prepare your documents for training
 
-In order to prepare a collection of documents with [Transkribus Expert Client](https://readcoop.eu/transkribus/download/) (version 1.19 or above) so that it can be used to train a spaCy model for named entity recognition, take the following sub-steps (tutorials on how to use the Transkribus Expert Client are provided by [READ-COOP](https://readcoop.eu/transkribus/resources/how-to-guides/)):
+This section explains how to prepare your documents using the [Transkribus Expert Client](https://readcoop.eu/transkribus/download/) in order to train a spaCy model for named entity recognition. Basic familiarity with the Transkribus Expert Client is assumed (see [READ-COOP](https://readcoop.eu/transkribus/resources/how-to-guides/) for tutorials). First the workflow is presented and then a detailed annotation sample is provided.
 
-1. Create a collection in Transkribus and upload all relevant documents. Automatically or manually segment and transcribe the documents, and carry out corrections if necessary. Be sure that you are happy with the result since there is no going back.
+### Workflow
+
+The preparation workflow involves five sub-steps:
+
+1. Create a collection in Transkribus and upload your documents. Automatically or manually segment and transcribe the documents, and carry out corrections if necessary. Be sure that you are happy with the result since there is no going back.
 2. Choose a representative sample of all documents. Think about the required sample size and make sure to include as much variety as possible.
-3. Define which entities you want to annotate and specify annotation guidelines. [!todo add link to annotation best practices]
-4. Annotate the representative sample. Try to ensure that annotations across all documents are consistent. Of course, annotation guidelines will likely be amended during the annotation process; simply try to be explicit in recording all decisions you are taking.
-5. If you are happy with the result, export the annotated representative sample (again, there is no going back from here).
+3. Define which entities you want to annotate and specify annotation guidelines.  Try to be explicit in recording all annotation decisions you are making. [!todo add link to annotation best practices]
+4. Annotate the representative sample. Try to ensure that annotations across all documents are consistent. Of course, annotation guidelines will likely have to be amended during the annotation process. Again, be sure that you are happy with the result since there is no going back.
+5. Export the annotated representative sample (again, there is no going back from here).
+
+### Sample annotation
+
+https://readcoop.eu/transkribus/howto/how-to-enrich-transcribed-documents-with-mark-up/
 
 ---
+
 
 This is the Transkribus Expert Client interface that is displayed when opening a document in a collection. Here we see the title page of [!todo link to specific file].
 Here you can navigate (as marked in yellow) to the "Overview".
@@ -76,7 +85,7 @@ The .xml pages are then used for the python script, as well as the text file.
 
 ![image](https://user-images.githubusercontent.com/62709221/171058409-b25aef4e-ac79-4777-ae40-3d669431b502.png)
 
-## STEP 2)
+## Second step: train your model
 In order to use the Python script or the JupyterNotebook, the following interfaces must be adapted
 for the user.
 The adjusting spots for the script will also be visible as comments in the code to be able to run the
@@ -144,7 +153,7 @@ The user just needs to add those names into the “person_names” list for pers
 the pipeline, then the user needs to separate those words within the list with a comma (“,”).
 
 
-## STEP 3)
+## Third step: evaluate your model
 In order to evaluate the custom trained model and the pre-trained spacy model, the
 “accuracy_calculation.py” can be used (or respectively the Notebook version of it).
 

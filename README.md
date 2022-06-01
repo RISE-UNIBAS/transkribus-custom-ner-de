@@ -1,13 +1,11 @@
 # Spacy_Model_Zionistenkongress
 Named Entity Recognition for Persons and Locations - Pre-Trained Spacy Model &amp; Own Model using Python
 
-
-
-# Creator
+## Creator
 This dataset was created by the University of Basel's Research and Infrastructure Support RISE (rise@unibas.ch) in May 2022. It is based on the digital collection of the Zionistenkongress in Basel 1897 xxxx
 
-# File structure and data overview
-Documentation of work in /docs 
+## File structure and data overview
+Tutorial in /docs 
 
 Data in /files with
 
@@ -20,9 +18,7 @@ Data in /files with
 - result of trained model based on training dataset as CSV file (.csv)
 - result of already pre-trained model of the spacy german large package as CSV file (.csv)
 
-
-
-# Data processing
+## Data processing
 - .xml files were extracted from the collection by importing the collection into Transkribus and then marking the PERSON (PER) and LOCATION (LOC) labels. Then the .xml files got exported (202) in an output file.
 This output file was then inserted into the python script, which then parses the XML files and extracts the labels to convert them into the spacy format.
 
@@ -33,9 +29,7 @@ This output file was then inserted into the python script, which then parses the
 
 - Saving the trained model in the output directory for the analysis later on and testing the sample inference using the trained model
 
-
-
-# Data analysis
+## Data analysis
 -The first step was to read the .txt-file (or each .txt-file) into Python using Python Version 3.7.9 to process the text and to have a basic identifier that can link any named entities back to the page they appeared on.
 
 -spaCy: the "de_core_news_lg" model is used to parse all the texts and perform a named entity recognition. Every entity tagged as PER, and/or Location (LOC). In addition to that you can use the own created and trained model. The resulting dataframe was saved as a .csv file.
@@ -55,8 +49,7 @@ Attend: Decide which parts are more informative given a query, and get problem s
 
 Predict: spaCy uses a multi layer perceptron for inference.
 
-
-# Results
+## Results
 
 Model Performance
 
@@ -68,8 +61,7 @@ Model Performance
 - Accuracy_calculation.py can be used to calculate the precision/recall/f1-score of the custom-trained model and the already pre-trained model by spacy using the large 
 german package and compares those two results
 
-
-# Update
+## Update
 - migrated all the code to spacy 3.3, because model comparison with spacy large model requires latest version.
 - there is minor update in label generation due to version upgrade.
 - Added lists to add persons and locations as a pattern using entity ruler.
@@ -77,3 +69,7 @@ german package and compares those two results
 - Added new script to calculate the various scores. First it gives overall scores then it also gives entity wise various scores.
 - Updated the requirements.txt with new library versions.
 - Added Jupyter notebook which covers everything with markdown descriptions.
+
+## License
+
+- CC BY 4.0 https://creativecommons.org/licenses/by/4.0/
