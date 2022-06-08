@@ -37,28 +37,28 @@ def extract_entities(folder_path):
     for j in range(len(xml_files)):
 
         print("processing file=================================== ", xml_files[j])
-        
+
         mytree = ET.parse(folder_path+xml_files[j])
         myroot = mytree.getroot()
 
         for x in myroot[1][1]:  ## looping over each Textline in the particular XML file
             if x.tag.endswith('TextLine'):
                 if "person" in x.attrib['custom'] or "place" in x.attrib['custom']:
-            
+
                     ents = x.attrib['custom'].split(" ")[2:]
                     print(ents)
                     sentence = x[-1][0].text
                     all_sentences_present.append(sentence)
-            
+
                     all_ents = []
-            
+
                     for i in range(0, len(ents)):
                         if ents[i] in ['person', 'place']:
                             if ents[i] == 'person':
                                 ent = 'PERSON'
                             else:
                                 ent = 'LOC'
-                
+
                             a = int(ents[i+1].split(":")[1][:-1])
 
                             ## following if-else condition is written as there are some labels which has 'continued:true' means there are more word belong to current word
@@ -76,7 +76,7 @@ def extract_entities(folder_path):
                                 except:
                                     i -= 4
                                     b = int(ents[i+2].split(":")[1][:-1])
-                
+
                             ent_tuple = [a, a+b, ent] #v2 update as per spacy 3.3.0 single list as per the format defined by spacy
                             all_ents.append(ent_tuple)
 
@@ -95,7 +95,7 @@ def extract_entities(folder_path):
                     print("=="*50)
 
     # storing all the labels in txt file 
-    with open("extracted_entities.txt", "w", encoding="utf-8") as outfile:
+    with open("../sample/extracted_entities.txt", "w", encoding="utf-8") as outfile:
         outfile.write("\n".join(str(item) for item in final_all_ents_tuple))
 
 

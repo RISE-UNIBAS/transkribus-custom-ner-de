@@ -81,7 +81,7 @@ def generate_prediction_list(nlp, data, word_remove):
 
 
 #loading custom trained spacy model
-model_path = "C:/Users/User/kaushal/misc/extra/g8/Custom_NER_DE/de_spacy_custom"
+model_path = ".../de_spacy_custom" # todo: change path
 nlp = load_custom_spacy_model(model_path)
 
 # add words in the list to remove

@@ -22,7 +22,7 @@ def load_data():
     """
 
     print("loading data...")
-    file1=open('extracted_entities.txt') #put the "extracted_entities.txt" file into the working directory -> change name here if you renamed the file which contains the entities of persons and locations
+    file1=open('../sample/extracted_entities.txt') #put the "extracted_entities.txt" file into the working directory -> change name here if you renamed the file which contains the entities of persons and locations
 
     lines = file1.readlines()
 

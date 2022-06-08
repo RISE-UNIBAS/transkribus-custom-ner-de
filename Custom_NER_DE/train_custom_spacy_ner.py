@@ -106,7 +106,7 @@ def extract_entities(folder_path, word_remove):
                     final_all_ents_tuple.append(final_tuple)  #this variable holds all the tuples from all the files
 
     # storing all the labels in txt file 
-    with open("extracted_entities.txt", "w", encoding="utf-8") as outfile:
+    with open("../sample/extracted_entities.txt", "w", encoding="utf-8") as outfile:
         outfile.write("\n".join(str(item) for item in final_all_ents_tuple))
 
     return final_all_ents_tuple
