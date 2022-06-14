@@ -1,8 +1,13 @@
-# Spacy_Model_Zionistenkongress
-Named Entity Recognition for Persons and Locations - Pre-Trained Spacy Model &amp; Own Model using Python
+# custom-ner-de
+
+Custom named entity recognition (persons, locations) using spaCy for German texts transcribed using Transkribus.
+
+Access this binder at the following URL
+
+ADD URL
 
 ## Creator
-This dataset was created by the University of Basel's Research and Infrastructure Support RISE (rise@unibas.ch) in May 2022. It is based on the digital collection of the Zionistenkongress in Basel 1897 xxxx
+This software and sample dataset were created by the University of Basel's Research and Infrastructure Support RISE (rise@unibas.ch) in May 2022. 
 
 ## File structure and data overview
 Tutorial in /docs 
