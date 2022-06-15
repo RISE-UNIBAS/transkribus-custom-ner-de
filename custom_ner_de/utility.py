@@ -18,7 +18,7 @@ class Utility:
 
         :param zip_path: complete path to zip file including filename and extension
         :param unzip_path: complete path to folder
-        :param verbose: bool = False
+        :param verbose: flag for verbose output, defaults to False
         """
 
         with ZipFile(file=zip_path, mode="r") as zip_object:
