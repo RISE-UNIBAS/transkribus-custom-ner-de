@@ -1,10 +1,6 @@
 """ extract.py
 
-This script is responsible for reading XML files from specified folder and extracts Person and Places available.
-
-It will print all the extracted entites and will also the store results in a text file.
-
-Execution time : 4 seconds for given 202 XML files.
+Function to extract entities from Transkribus PAGE XML Zip file.
 """
 
 from custom_ner_de.utility import Utility
@@ -74,7 +70,7 @@ def extract_entities(zip_path: str,
 
                                 a = int(ents[i+1].split(":")[1][:-1])
 
-                                # some labels have "continued:true" meaning there are more words belonging to current word:
+                                # labels with "continued:true" are such that more words belong to current word:
                                 if ents[i+2].endswith("}"):
                                     b = int(ents[i+2].split(":")[1][:-2])
                                 else:

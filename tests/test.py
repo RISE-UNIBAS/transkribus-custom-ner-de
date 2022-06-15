@@ -19,13 +19,12 @@ class TestExtract(unittest.TestCase):
         self.extract_gold = DIR + "/extract_gold.txt"
 
     def test_extract_entities(self):
-        """ blah. """
+        """ Test extract_entities function. """
 
-        entities = extract_entities(zip_path=self.input)
+        entities = "\n".join(str(item) for item in extract_entities(zip_path=self.input))
         with open(self.extract_gold, mode="r", encoding="utf-8") as file:
             gold_entities = file.read()
-        print(gold_entities)
-        self.assertEqual(entities, gold_entities.rstrip())
+        self.assertEqual(entities, gold_entities)
 
 
 if __name__ == '__main__':
