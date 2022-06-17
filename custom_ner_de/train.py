@@ -16,8 +16,7 @@ def custom_ner_training(entities: List[tuple],
                         save_dir: str,
                         person_names: List[str] = None,
                         location_names: List[str] = None,
-                        epochs: int = 100,
-                        verbose: bool = False):
+                        epochs: int = 100):
     """ Train a spaCy NER model on previously extracted entities.
 
     :param entities: list of tuples of extracted entities as defined by spaCy
@@ -25,7 +24,6 @@ def custom_ner_training(entities: List[tuple],
     :param person_names: person names to be included for entity ruler, defaults to None
     :param location_names: location names to be included for entity ruler, defaults to None
     :param epochs: number of training epochs, defaults to 100
-    :param verbose: flag for verbose output, defaults to False
     """
 
     try:
@@ -62,11 +60,12 @@ def custom_ner_training(entities: List[tuple],
         for ent in annotations.get('entities'):
             ner.add_label(ent[2])
 
-    print("Starting training for {0} epochs.....".format(epochs))
+    print("Training {0} epochs...".format(epochs), end=" ")
 
     # training code:
     nlp.begin_training()
     for itn in range(epochs):
+        print(f"{itn}", end=" ")
         random.shuffle(entities)
         losses = {}
         # batch up the examples using spaCy's minibatch:
@@ -83,7 +82,7 @@ def custom_ner_training(entities: List[tuple],
             nlp.update(example, drop=0.5, losses=losses)
 
     # save trained model to directory:
-    print("Training completed...", end=" ")
+    print("\nTraining completed,", end=" ")
     nlp.to_disk(save_dir)
     print(f"saved model to {save_dir}")
 

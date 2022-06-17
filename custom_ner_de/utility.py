@@ -25,3 +25,9 @@ class Utility:
             zip_object.extractall(path=unzip_path)
             if verbose is True:
                 print(f"{len(os.listdir(unzip_path))} files unzipped to {unzip_path}.")
+
+    @staticmethod
+    def zip_from_memory() -> None:
+        """"""
+
+        pass

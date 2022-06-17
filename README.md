@@ -1,6 +1,6 @@
 # custom-ner-de
 
-Custom named entity recognition (persons, locations) using spaCy for German texts transcribed using Transkribus.
+Custom named entity recognition (persons, locations) using spaCy for German texts annotated using Transkribus.
 
 Access this binder at the following URL
 
