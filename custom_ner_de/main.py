@@ -13,16 +13,6 @@ WORD_REMOVE = ["BASEL", "HÃ¤ndeklatschen"]
 PERSON_NAMES = ['Gustav Gottheil']
 LOCATION_NAMES = ['Boston', 'Roman']
 
-from custom_ner_de.client import Client
-
-Client().run(zip_url="e",
-             word_remove=WORD_REMOVE,
-             person_names=PERSON_NAMES,
-             location_names=LOCATION_NAMES
-             )
-
-exit()
-
 
 def main() -> None:
     """ bla """

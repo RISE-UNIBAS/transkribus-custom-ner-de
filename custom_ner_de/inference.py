@@ -1,5 +1,5 @@
 """
-filename : inference_custom_model_test_data.py
+filename : inference.py
 
 This script is responsible for using custom trained model and generate results on input data.
 
@@ -79,6 +79,8 @@ def generate_prediction_list(nlp, data, word_remove):
 
     return all_persons, all_locations
 
+
+# todo: cont here
 
 #loading custom trained spacy model
 model_path = ".../de_spacy_custom" # todo: change path

@@ -14,7 +14,6 @@ from typing import List
 from warnings import filterwarnings
 import shutil
 
-
 DIR = path.dirname(__file__)
 PARENT_DIR = path.dirname(path.dirname(__file__))
 
