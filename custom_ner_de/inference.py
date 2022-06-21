@@ -10,11 +10,27 @@ It will print the results on terminal and save it in csv file.
 Execution time : <1 second for single text i/p, 20 seconds on test data provided.
 """
 
+
+import pandas as pd
+import spacy
 import warnings
 warnings.filterwarnings('ignore')
 
-import spacy
-import pandas as pd
+
+class Inference:
+    pass
+
+    @staticmethod
+    def load_model(model_path: str):
+        """ Load a custom spaCy NER model.
+
+        :param model_path: complete path to model directory
+        """
+
+        return spacy.load(name=model_path)
+
+
+
 
 def load_custom_spacy_model(model_path):
     """
@@ -79,6 +95,7 @@ def generate_prediction_list(nlp, data, word_remove):
 
     return all_persons, all_locations
 
+"""
 
 # todo: cont here
 
@@ -110,3 +127,4 @@ df['Custom-trained_Spacy_Location'] = pd.Series(all_locations)
 df.to_csv('Custom_NER_inference_results.csv',index=False)
 
 print("results stored in csv file....")
+"""
