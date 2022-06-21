@@ -1,11 +1,10 @@
 """ client.py
 
-Session class ."""
+Client class ."""
 
 from __future__ import annotations
 
 from custom_ner_de.extract import extract_entities
-from custom_ner_de.inference import Inference
 from custom_ner_de.train import custom_ner_training
 from datetime import datetime
 from os import path
@@ -15,13 +14,14 @@ from tempfile import TemporaryDirectory, TemporaryFile
 from typing import List
 from warnings import filterwarnings
 import shutil
+import spacy
 
 DIR = path.dirname(__file__)
 PARENT_DIR = path.dirname(path.dirname(__file__))
 
 
 class Client:
-    """ Standalone client for Binder.
+    """ Standalone client.
 
     :param entities: the extracted entities, defaults to None
     :param model_dir: the directory of the custom NER model, defaults to None
@@ -91,7 +91,7 @@ class Client:
 
     def load_model(self,
                    model_path: str = None) -> None:
-        """ Load custom NER model.
+        """ Load custom NER model to self.model.
 
         If no model_path is provided, an attempt is made to load the model from self.model_directory.
 
@@ -99,10 +99,8 @@ class Client:
         """
 
         if model_path is None:
-            self.model = Inference.load_model(model_path=self.model_dir.name)
+            spacy.load(name=self.model_dir.name)
         else:
-            self.model = Inference.load_model(model_path=model_path)
-
-
+            spacy.load(name=model_path)
 
 
