@@ -144,8 +144,8 @@ def calculate_pre_trained_model_score(data):
 
 
 
-data = load_data()
+"""data = load_data()
 
 calculate_custom_model_accuracy(data)
 
-calculate_pre_trained_model_score(data)
+calculate_pre_trained_model_score(data)"""

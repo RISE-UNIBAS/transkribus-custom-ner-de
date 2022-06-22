@@ -54,7 +54,6 @@ class Client:
         if os.path.isdir(PARENT_DIR + "/user_output/") is False:
             os.mkdir(PARENT_DIR + "/user_output/")
 
-
     def train_model(self,
                     zip_url: str,
                     word_remove: List[str] = None,
