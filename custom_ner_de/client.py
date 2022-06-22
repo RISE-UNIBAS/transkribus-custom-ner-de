@@ -4,8 +4,10 @@ Client class ."""
 
 from __future__ import annotations
 
+import os.path
+
 from custom_ner_de.extract import extract_entities
-from custom_ner_de.inference import predict
+from custom_ner_de.predict import predict
 from custom_ner_de.train import custom_ner_training
 from datetime import datetime
 from os import path
@@ -49,6 +51,9 @@ class Client:
         """ Set up client. """
 
         self.model_dir = TemporaryDirectory()
+        if os.path.isdir(PARENT_DIR + "/user_output/") is False:
+            os.mkdir(PARENT_DIR + "/user_output/")
+
 
     def train_model(self,
                     zip_url: str,
@@ -96,10 +101,19 @@ class Client:
                             epochs=epochs
                             )
 
-    def save_model(self) -> None:
-        """ Save custom NER model to /models/datetime. """
+    def save_model(self,
+                   save_dir: str = None) -> None:
+        """ Save custom NER model.
 
-        save_dir = PARENT_DIR + "/models/" + datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
+        If no save directory is provided, the model is saved to /user_output/models/.
+
+        :param save_dir: complete path to model directory, defaults to None
+        """
+
+        if save_dir is None:
+            if os.path.exists(PARENT_DIR + "/user_output/models/") is False:
+                os.mkdir(path=PARENT_DIR + "/user_output/models/")
+            save_dir = PARENT_DIR + "/user_output/models/" + datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
         shutil.copytree(self.model_dir.name, save_dir)
         print(f"Saved model to {save_dir}.")
 
@@ -133,7 +147,7 @@ class Client:
         filterwarnings('ignore')
 
         if _local is True:
-            self.input_text = self.text2csv(text_path=text_url)
+            self.input_text = self.load_text2csv(text_path=text_url)
         else:
             print(f"Downloading TXT file...", end=" ")
             download = TemporaryFile()
@@ -141,7 +155,7 @@ class Client:
                 download.write(Session().get(url=text_url).content)
             except exceptions.RequestException as e:
                 raise SystemExit(e)
-            self.input_text = self.text2csv(text_path=download)
+            self.input_text = self.load_text2csv(text_path=download)
             download.close()
             print(f"done.")
 
@@ -154,14 +168,14 @@ class Client:
 
         print(f"Applying custom NER model to TXT file...", end=" ")
         persons, locations = predict(model=self.model,
-                                     text=self.input_text)
+                                     dataframe=self.input_text)
         self.result = self.input_text.copy()
         self.result["persons"] = Series(persons)
         self.result["locations"] = Series(locations)
         print(f"done.")
 
     @staticmethod
-    def text2csv(text_path: str) -> DataFrame:
+    def load_text2csv(text_path: str) -> DataFrame:
         """ Load plain text as CSV.
 
         :param text_path: complete path to the plain text file including .txt extension
@@ -174,3 +188,19 @@ class Client:
                              names=["text"])
 
         return dataframe
+
+    def save_result2csv(self,
+                        save_path: str = None) -> None:
+        """ Save result as CSV-file.
+
+        If no save path is provided, the result is saved to /user_output/results/.
+
+        :param save_path:
+        """
+
+        if save_path is None:
+            if os.path.exists(PARENT_DIR + "/user_output/results/") is False:
+                os.mkdir(path=PARENT_DIR + "/user_output/results/")
+            save_path = PARENT_DIR + "/user_output/results/" + datetime.now().strftime("%Y-%m-%d-%H-%M-%S") + ".csv"
+        self.result.to_csv(path_or_buf=save_path, index=False)
+        print(f"Saved result to {save_path}.")

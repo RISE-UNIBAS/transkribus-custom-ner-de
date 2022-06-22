@@ -13,7 +13,7 @@ PERSON_NAMES = ['Gustav Gottheil']
 LOCATION_NAMES = ['Boston', 'Roman']
 ZIP_PATH = PARENT_DIR + "/sample/Protokoll-Zionistenkongress-Basel_1897-0200.zip"
 TEXT_PATH = PARENT_DIR + "/sample/03_Protokoll-Zionistenkongress-Basel_1899.txt"
-MODEL_PATH = PARENT_DIR + "/sample/custom_model_de_ner"
+MODEL_PATH = PARENT_DIR + "/sample/custom_ner_de_model"
 
 def test():
 
@@ -21,6 +21,8 @@ def test():
     my_client.apply_model(text_url=TEXT_PATH,
                           model_path=MODEL_PATH,
                           _local=True)
+    print(my_client.result)
+    my_client.save_result2csv()
 
 test()
 

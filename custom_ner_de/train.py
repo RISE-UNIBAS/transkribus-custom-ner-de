@@ -78,7 +78,7 @@ def custom_ner_training(entities: List[tuple],
                 doc = nlp.make_doc(texts[i])
                 example.append(Example.from_dict(doc, annotations[i]))
             
-            # Update the model
+            # update the model
             nlp.update(example, drop=0.5, losses=losses)
 
     # save trained model to directory:
