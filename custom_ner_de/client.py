@@ -5,9 +5,11 @@ Client class ."""
 from __future__ import annotations
 
 from custom_ner_de.extract import extract_entities
+from custom_ner_de.inference import predict
 from custom_ner_de.train import custom_ner_training
 from datetime import datetime
 from os import path
+from pandas import DataFrame, read_csv, Series
 from requests import exceptions, Session
 from spacy import Language
 from tempfile import TemporaryDirectory, TemporaryFile
@@ -32,11 +34,15 @@ class Client:
     def __init__(self,
                  entities: List[tuple] = None,
                  model_dir: TemporaryDirectory = None,
-                 model: Language = None
+                 model: Language = None,
+                 input_text: DataFrame = None,
+                 result=None,
                  ) -> None:
         self.entities = entities
         self.model_dir = model_dir
         self.model = model
+        self.input_text = input_text
+        self.result = result
         self.setup()
 
     def setup(self):
@@ -49,7 +55,8 @@ class Client:
                     word_remove: List[str] = None,
                     person_names: List[str] = None,
                     location_names: List[str] = None,
-                    epochs: int = 100) -> None:
+                    epochs: int = 100,
+                    _local: bool = False) -> None:
         """ Train custom NER model.
 
         :param zip_url: URL to Zip file (PAGE XML) of annotated documents exported from Transkribus
@@ -57,23 +64,30 @@ class Client:
         :param person_names: person names to be included for entity ruler, defaults to None
         :param location_names: location names to be included for entity ruler, defaults to None
         :param epochs: number of training epochs, defaults to 100
+        :param _local: toggle interpreting text_url as complete path to text instead of URL, defaults to False
         """
 
         filterwarnings('ignore')
 
-        print(f"Downloading Zip file...", end=" ")
-        download = TemporaryFile()
-        try:
-            download.write(Session().get(url=zip_url).content)
-        except exceptions.RequestException as e:
-            raise SystemExit(e)
-        print(f"done.")
+        if _local is True:
+            print(f"Extracting entities...", end=" ")
+            self.entities = extract_entities(zip_path=zip_url,
+                                             word_remove=word_remove)
+            print(f"done.")
+        else:
+            print(f"Downloading Zip file...", end=" ")
+            download = TemporaryFile()
+            try:
+                download.write(Session().get(url=zip_url).content)
+            except exceptions.RequestException as e:
+                raise SystemExit(e)
+            print(f"done.")
 
-        print(f"Extracting entities...", end=" ")
-        self.entities = extract_entities(zip_path=download,
-                                         word_remove=word_remove)
-        download.close()
-        print(f"done.")
+            print(f"Extracting entities...", end=" ")
+            self.entities = extract_entities(zip_path=download,
+                                             word_remove=word_remove)
+            download.close()
+            print(f"done.")
 
         custom_ner_training(entities=self.entities,
                             save_dir=self.model_dir.name,
@@ -99,8 +113,64 @@ class Client:
         """
 
         if model_path is None:
-            spacy.load(name=self.model_dir.name)
+            self.model = spacy.load(name=self.model_dir.name)
         else:
-            spacy.load(name=model_path)
+            self.model = spacy.load(name=model_path)
 
+    def apply_model(self,
+                    text_url: str,
+                    model_path: str = None,
+                    _local: bool = False) -> None:
+        """ Apply a custom NER model to a text.
 
+        If no model is provided, an attempt is made to load the model from self.model_directory.
+
+        :param text_url: URL to plain text file
+        :param model_path: complete path to model directory, defaults to None
+        :param _local: toggle interpreting text_url as complete path to text instead of URL, defaults to False
+        """
+
+        filterwarnings('ignore')
+
+        if _local is True:
+            self.input_text = self.text2csv(text_path=text_url)
+        else:
+            print(f"Downloading TXT file...", end=" ")
+            download = TemporaryFile()
+            try:
+                download.write(Session().get(url=text_url).content)
+            except exceptions.RequestException as e:
+                raise SystemExit(e)
+            self.input_text = self.text2csv(text_path=download)
+            download.close()
+            print(f"done.")
+
+        print(f"Loading custom NER model...", end=" ")
+        try:
+            self.load_model(model_path=model_path)
+        except Exception as e:
+            raise SystemExit(e)
+        print(f"done.")
+
+        print(f"Applying custom NER model to TXT file...", end=" ")
+        persons, locations = predict(model=self.model,
+                                     text=self.input_text)
+        self.result = self.input_text.copy()
+        self.result["persons"] = Series(persons)
+        self.result["locations"] = Series(locations)
+        print(f"done.")
+
+    @staticmethod
+    def text2csv(text_path: str) -> DataFrame:
+        """ Load plain text as CSV.
+
+        :param text_path: complete path to the plain text file including .txt extension
+        """
+
+        dataframe = read_csv(filepath_or_buffer=text_path,
+                             engine="python",
+                             delimiter="\n",
+                             header=None,
+                             names=["text"])
+
+        return dataframe

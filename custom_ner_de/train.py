@@ -60,12 +60,12 @@ def custom_ner_training(entities: List[tuple],
         for ent in annotations.get('entities'):
             ner.add_label(ent[2])
 
-    print("Training {0} epochs...".format(epochs + 1), end=" ")
+    print("Training {0} epochs...".format(epochs), end=" ")
 
     # training code:
     nlp.begin_training()
     for itn in range(epochs):
-        print(f"{itn}", end=" ")
+        print(f"{itn + 1}", end=" ")
         random.shuffle(entities)
         losses = {}
         # batch up the examples using spaCy's minibatch:

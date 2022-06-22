@@ -1,43 +1,25 @@
-"""
-filename : inference.py
+""" inference.py
 
-This script is responsible for using custom trained model and generate results on input data.
-
-This script has 2 entity detection functions, first for single text and second for entire dataframe or list.
-
-It will print the results on terminal and save it in csv file.
-
-Execution time : <1 second for single text i/p, 20 seconds on test data provided.
 """
 
 from typing import List
-import pandas as pd
+from pandas import DataFrame
 import spacy
-import warnings
-
-warnings.filterwarnings('ignore')
 
 
 def predict(model: spacy.Language,
-            text_path: str,
+            text: DataFrame,
             word_remove: List[str] = None) -> tuple:
-    """ Return persons and locations extracted form plain text file using (custom) trained spaCy model for NER.
+    """ Return persons and locations extracted from text using (custom) trained spaCy model for NER.
 
-    :param model: the spaCy NER model
-    :param text_path: complete path to the plain text file including .txt extension
+    :param model: the (custom) spaCy NER model
+    :param text: text formatted as DataFrame
     :param word_remove: list of words to remove, defaults to None
     """
 
-    #
-    output = pd.read_csv(filepath_or_buffer=text_path,
-                         delimiter="\n",
-                         header=None,
-                         names=["text"])
-    text = list(output['text'])
-
+    # predict entities for text per line using the model:
     all_persons = []
     all_locations = []
-
     for line in text:
         doc = model(line)
         all_persons.append([ent.text for ent in doc.ents if ent.label_ == 'PERSON' and ent.text not in word_remove])
@@ -45,10 +27,12 @@ def predict(model: spacy.Language,
 
     return all_persons, all_locations
 
-    """
-    output['persons'] = pd.Series(all_persons)
-    output['locations'] = pd.Series(all_locations)
+    #output['persons'] = pd.Series(all_persons)
+    #output['locations'] = pd.Series(all_locations)
 
+    #return output
+
+"""
     # storing results in csv file
     output.to_csv('Custom_NER_inference_results.csv',index=False)
     """
