@@ -9,6 +9,7 @@ import os.path
 from custom_ner_de.extract import extract_entities
 from custom_ner_de.predict import predict
 from custom_ner_de.train import custom_ner_training
+from custom_ner_de.utility import Utility
 from datetime import datetime
 from os import path
 from pandas import DataFrame, read_csv, Series
@@ -146,7 +147,7 @@ class Client:
         filterwarnings('ignore')
 
         if _local is True:
-            self.input_text = self.load_text2csv(text_path=text_url)
+            self.input_text = Utility.load_text2csv(text_path=text_url)
         else:
             print(f"Downloading TXT file...", end=" ")
             download = TemporaryFile()
@@ -154,7 +155,7 @@ class Client:
                 download.write(Session().get(url=text_url).content)
             except exceptions.RequestException as e:
                 raise SystemExit(e)
-            self.input_text = self.load_text2csv(text_path=download)
+            self.input_text = Utility.load_text2csv(text_path=download)
             download.close()
             print(f"done.")
 
@@ -172,21 +173,6 @@ class Client:
         self.result["locations"] = Series(locations)
         print(f"done.")
 
-    @staticmethod
-    def load_text2csv(text_path: str) -> DataFrame:
-        """ Load plain text as CSV.
-
-        :param text_path: complete path to the plain text file including .txt extension
-        """
-
-        dataframe = read_csv(filepath_or_buffer=text_path,
-                             engine="python",
-                             delimiter="\n",
-                             header=None,
-                             names=["text"])
-
-        return dataframe
-
     def save_result2csv(self,
                         save_path: str = None) -> None:
         """ Save result as CSV-file.
@@ -202,3 +188,7 @@ class Client:
             save_path = PARENT_DIR + "/user_output/results/" + datetime.now().strftime("%Y-%m-%d-%H-%M-%S") + ".csv"
         self.result.to_csv(path_or_buf=save_path, index=False)
         print(f"Saved result to {save_path}.")
+
+
+
+
