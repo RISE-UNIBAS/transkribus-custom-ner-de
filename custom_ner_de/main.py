@@ -24,7 +24,7 @@ def main():
                           word_remove=WORD_REMOVE,
                           person_names=PERSON_NAMES,
                           location_names=LOCATION_NAMES,
-                          epochs=5,
+                          epochs=1,
                           _local=True)
 
     my_client.apply_model(text_url=TEXT_PATH,
@@ -32,6 +32,9 @@ def main():
 
     print(my_client.result)
     my_client.save_result2csv()
+
+    my_client.evaluate_model()
+    my_client.evaluate_model(model_path=MODEL_PATH)
 
 
 main()

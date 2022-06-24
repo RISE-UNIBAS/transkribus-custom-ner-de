@@ -7,12 +7,13 @@ from __future__ import annotations
 import os.path
 
 from custom_ner_de.extract import extract_entities
+from custom_ner_de.evaluate import evaluate_model
 from custom_ner_de.predict import predict
 from custom_ner_de.train import custom_ner_training
 from custom_ner_de.utility import Utility
 from datetime import datetime
 from os import path
-from pandas import DataFrame, read_csv, Series
+from pandas import DataFrame, Series
 from requests import exceptions, Session
 from spacy import Language
 from tempfile import TemporaryDirectory, TemporaryFile
@@ -28,20 +29,22 @@ PARENT_DIR = path.dirname(path.dirname(__file__))
 class Client:
     """ Standalone client.
 
-    :param entities: the extracted entities, defaults to None
+    :param gold_standard: the gold standard, defaults to None
     :param model_dir: the directory of the custom NER model, defaults to None
     :param model: the loaded custom NER model, defaults to None
 
     """
 
     def __init__(self,
-                 entities: List[tuple] = None,
+                 gold_standard: List[tuple] = None,
+                 training: List[tuple] = None,
+                 validation: List[tuple] = None,
                  model_dir: TemporaryDirectory = None,
                  model: Language = None,
                  input_text: DataFrame = None,
-                 result=None,
+                 result: DataFrame = None,
                  ) -> None:
-        self.entities = entities
+        self.gold_standard = gold_standard
         self.model_dir = model_dir
         self.model = model
         self.input_text = input_text
@@ -76,8 +79,8 @@ class Client:
 
         if _local is True:
             print(f"Extracting entities...", end=" ")
-            self.entities = extract_entities(zip_path=zip_url,
-                                             word_remove=word_remove)
+            self.gold_standard = extract_entities(zip_path=zip_url,
+                                                  word_remove=word_remove)
             print(f"done.")
         else:
             print(f"Downloading Zip file...", end=" ")
@@ -88,13 +91,13 @@ class Client:
                 raise SystemExit(e)
             print(f"done.")
 
-            print(f"Extracting entities...", end=" ")
-            self.entities = extract_entities(zip_path=download,
-                                             word_remove=word_remove)
+            print(f"Loading gold standard...", end=" ")
+            self.gold_standard = extract_entities(zip_path=download,
+                                                  word_remove=word_remove)
             download.close()
             print(f"done.")
 
-        custom_ner_training(entities=self.entities,
+        custom_ner_training(entities=self.gold_standard,
                             save_dir=self.model_dir.name,
                             person_names=person_names,
                             location_names=location_names,
@@ -137,7 +140,7 @@ class Client:
                     _local: bool = False) -> None:
         """ Apply a custom NER model to a text.
 
-        If no model is provided, an attempt is made to load the model from self.model_directory.
+        If no model path is provided, an attempt is made to load the model from self.model_directory.
 
         :param text_url: URL to plain text file
         :param model_path: complete path to model directory, defaults to None
@@ -188,6 +191,36 @@ class Client:
             save_path = PARENT_DIR + "/user_output/results/" + datetime.now().strftime("%Y-%m-%d-%H-%M-%S") + ".csv"
         self.result.to_csv(path_or_buf=save_path, index=False)
         print(f"Saved result to {save_path}.")
+
+    def evaluate_model(self,
+                       model_path: str = None) -> None:
+        """ Evaluate a (custom) NER model.
+
+        If no model path is provided, an attempt is made to load the model from self.model_directory.
+
+        :param model_path: complete path to model directory, defaults to None
+        """
+
+        if model_path is None:
+            model_path = self.model_dir.name
+
+        print(f"Loading custom NER model...", end=" ")
+        try:
+            self.load_model(model_path=model_path)
+        except Exception as e:
+            raise SystemExit(e)
+
+        try:
+            assert self.gold_standard is not None
+        except AssertionError:
+            raise "Error: No gold standard defined! Exiting."
+
+        print(f"Evaluation of {model_path} completed.")
+        evaluate_model(model=self.model,
+                       gold_standard=self.gold_standard)
+
+
+
 
 
 
