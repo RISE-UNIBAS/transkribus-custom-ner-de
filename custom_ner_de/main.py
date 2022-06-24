@@ -15,20 +15,6 @@ ZIP_PATH = PARENT_DIR + "/sample/Protokoll-Zionistenkongress-Basel_1897-0200.zip
 TEXT_PATH = PARENT_DIR + "/sample/03_Protokoll-Zionistenkongress-Basel_1899.txt"
 MODEL_PATH = PARENT_DIR + "/sample/custom_ner_de_model"
 
-def test():
-
-    my_client = Client()
-    my_client.apply_model(text_url=TEXT_PATH,
-                          model_path=MODEL_PATH,
-                          _local=True)
-    print(my_client.result)
-    my_client.save_result2csv()
-
-test()
-
-
-exit()
-
 
 def main():
 
@@ -38,12 +24,14 @@ def main():
                           word_remove=WORD_REMOVE,
                           person_names=PERSON_NAMES,
                           location_names=LOCATION_NAMES,
-                          epochs=20,
+                          epochs=5,
                           _local=True)
 
     my_client.apply_model(text_url=TEXT_PATH,
                           _local=True)
 
     print(my_client.result)
+    my_client.save_result2csv()
+
 
 main()

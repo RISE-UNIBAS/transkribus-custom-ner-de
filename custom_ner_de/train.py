@@ -84,5 +84,5 @@ def custom_ner_training(entities: List[tuple],
     # save trained model to directory:
     print("\nTraining completed,", end=" ")
     nlp.to_disk(save_dir)
-    print(f"saved model to {save_dir}")
+    print(f"saved model to {save_dir}.")
 

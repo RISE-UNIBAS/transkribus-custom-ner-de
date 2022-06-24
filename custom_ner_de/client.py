@@ -126,9 +126,9 @@ class Client:
         """
 
         if model_path is None:
-            self.model = spacy.load(name=self.model_dir.name)
-        else:
-            self.model = spacy.load(name=model_path)
+            model_path = self.model_dir.name
+        self.model = spacy.load(name=model_path)
+        print(f"{model_path} loaded.")
 
     def apply_model(self,
                     text_url: str,
@@ -163,7 +163,6 @@ class Client:
             self.load_model(model_path=model_path)
         except Exception as e:
             raise SystemExit(e)
-        print(f"done.")
 
         print(f"Applying custom NER model to TXT file...", end=" ")
         persons, locations = predict(model=self.model,
