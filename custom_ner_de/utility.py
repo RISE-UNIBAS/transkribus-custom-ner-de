@@ -4,7 +4,7 @@ Utility class ."""
 
 from __future__ import annotations
 
-from pandas import DataFrame, read_csv
+from pandas import DataFrame, read_csv, read_table
 from zipfile import ZipFile
 import os
 
@@ -21,8 +21,6 @@ class Utility:
         dataframe = read_csv(filepath_or_buffer=text_path,
                              engine="python",
                              delimiter="\n",
-                             #sep=None,
-                             #delim_whitespace=True,
                              header=None,
                              names=["text"])
 

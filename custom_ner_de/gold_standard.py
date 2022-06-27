@@ -29,7 +29,6 @@ class GoldStandard:
         :param zip_path: complete path to zip file including filename and .zip extension
         :param save_path: complete path to save file including filename and .txt extension, defaults to None
         :param word_remove: list of words to remove, defaults to None
-        :param verbose: flag for verbose output, defaults to False
         """
 
         if word_remove is None:

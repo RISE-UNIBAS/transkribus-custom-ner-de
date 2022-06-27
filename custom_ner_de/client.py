@@ -21,6 +21,7 @@ from typing import List
 from warnings import filterwarnings
 import shutil
 import spacy
+import re
 
 DIR = path.dirname(__file__)
 PARENT_DIR = path.dirname(path.dirname(__file__))
@@ -155,13 +156,9 @@ class Client:
             self.input_text = Utility.load_text2csv(text_path=text_url)
         else:
             print(f"Downloading TXT file...", end=" ")
-            download = TemporaryFile()
-            try:
-                download.write(Session().get(url=text_url).content)
-            except exceptions.RequestException as e:
-                raise SystemExit(e)
-            self.input_text = Utility.load_text2csv(text_path=download)
-            download.close()
+            download = Session().get(url=text_url).text
+            self.input_text = DataFrame(data=Series(data=re.split(pattern="\r\n?|\n", string=download),
+                                                    name="text"))
             print(f"done.")
 
         print(f"Loading custom NER model...", end=" ")
