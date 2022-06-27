@@ -4,7 +4,7 @@ Unittest. """
 
 import os.path
 import unittest
-from custom_ner_de.extract import extract_entities
+from custom_ner_de.gold_standard import make
 
 DIR = os.path.dirname(__file__)
 PARENT_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -21,7 +21,7 @@ class TestExtract(unittest.TestCase):
     def test_extract_entities(self):
         """ Test extract_entities function. """
 
-        entities = "\n".join(str(item) for item in extract_entities(zip_path=self.input))
+        entities = "\n".join(str(item) for item in make(zip_path=self.input))
         with open(self.extract_gold, mode="r", encoding="utf-8") as file:
             gold_entities = file.read()
         self.assertEqual(entities, gold_entities)

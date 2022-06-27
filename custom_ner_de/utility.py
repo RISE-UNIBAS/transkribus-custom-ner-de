@@ -21,6 +21,8 @@ class Utility:
         dataframe = read_csv(filepath_or_buffer=text_path,
                              engine="python",
                              delimiter="\n",
+                             #sep=None,
+                             #delim_whitespace=True,
                              header=None,
                              names=["text"])
 

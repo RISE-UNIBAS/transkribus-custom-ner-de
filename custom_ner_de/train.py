@@ -12,14 +12,14 @@ import random
 import spacy
 
 
-def custom_ner_training(entities: List[tuple],
+def custom_ner_training(gold_standard: List[tuple],
                         save_dir: str,
                         person_names: List[str] = None,
                         location_names: List[str] = None,
                         epochs: int = 100):
     """ Train a spaCy NER model on previously extracted entities.
 
-    :param entities: list of tuples of extracted entities as defined by spaCy
+    :param gold_standard: gold standard as defined by spaCy
     :param save_dir: complete path to directory where model is saved
     :param person_names: person names to be included for entity ruler, defaults to None
     :param location_names: location names to be included for entity ruler, defaults to None
@@ -56,7 +56,7 @@ def custom_ner_training(entities: List[tuple],
     nlp.to_disk(save_dir)
     
     # adding data
-    for _, annotations in entities:
+    for _, annotations in gold_standard:
         for ent in annotations.get('entities'):
             ner.add_label(ent[2])
 
@@ -66,10 +66,10 @@ def custom_ner_training(entities: List[tuple],
     nlp.begin_training()
     for itn in range(epochs):
         print(f"{itn + 1}", end=" ")
-        random.shuffle(entities)
+        random.shuffle(gold_standard)
         losses = {}
         # batch up the examples using spaCy's minibatch:
-        batches = minibatch(entities, size=compounding(4.0, 32.0, 1.001))
+        batches = minibatch(gold_standard, size=compounding(4.0, 32.0, 1.001))
         for batch in batches:
             texts, annotations = zip(*batch)
             example = []

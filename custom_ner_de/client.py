@@ -6,7 +6,7 @@ from __future__ import annotations
 
 import os.path
 
-from custom_ner_de.extract import extract_entities
+from custom_ner_de.gold_standard import GoldStandard
 from custom_ner_de.evaluate import evaluate_model
 from custom_ner_de.predict import predict
 from custom_ner_de.train import custom_ner_training
@@ -36,9 +36,7 @@ class Client:
     """
 
     def __init__(self,
-                 gold_standard: List[tuple] = None,
-                 training: List[tuple] = None,
-                 validation: List[tuple] = None,
+                 gold_standard: GoldStandard = None,
                  model_dir: TemporaryDirectory = None,
                  model: Language = None,
                  input_text: DataFrame = None,
@@ -54,6 +52,7 @@ class Client:
     def setup(self):
         """ Set up client. """
 
+        self.gold_standard = GoldStandard()
         self.model_dir = TemporaryDirectory()
         if os.path.isdir(PARENT_DIR + "/user_output/") is False:
             os.mkdir(PARENT_DIR + "/user_output/")
@@ -78,9 +77,9 @@ class Client:
         filterwarnings('ignore')
 
         if _local is True:
-            print(f"Extracting entities...", end=" ")
-            self.gold_standard = extract_entities(zip_path=zip_url,
-                                                  word_remove=word_remove)
+            print(f"Loading gold standard...", end=" ")
+            self.gold_standard.make(zip_path=zip_url,
+                                    word_remove=word_remove)
             print(f"done.")
         else:
             print(f"Downloading Zip file...", end=" ")
@@ -92,12 +91,15 @@ class Client:
             print(f"done.")
 
             print(f"Loading gold standard...", end=" ")
-            self.gold_standard = extract_entities(zip_path=download,
-                                                  word_remove=word_remove)
+            self.gold_standard.make(zip_path=download,
+                                    word_remove=word_remove)
             download.close()
             print(f"done.")
 
-        custom_ner_training(entities=self.gold_standard,
+        print(f"Splitting gold standard into training and validation...", end=" ")
+        self.gold_standard.split()
+
+        custom_ner_training(gold_standard=self.gold_standard.training,
                             save_dir=self.model_dir.name,
                             person_names=person_names,
                             location_names=location_names,
@@ -217,11 +219,4 @@ class Client:
 
         print(f"Evaluation of {model_path} completed.")
         evaluate_model(model=self.model,
-                       gold_standard=self.gold_standard)
-
-
-
-
-
-
-
+                       gold_standard=self.gold_standard.validation)

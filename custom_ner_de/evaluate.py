@@ -25,11 +25,11 @@ def evaluate_model(model: Language = None,
     print("-- Person entity scores:")
     print("Precision: ", scores_model["ents_per_type"]['PERSON']['p'])
     print("Recall: ", scores_model["ents_per_type"]['PERSON']['r'])
-    print("F1 Score: ", scores_model["ents_per_type"]['PERSON']['r'])
+    print("F1 Score: ", scores_model["ents_per_type"]['PERSON']['f'])
     print("-- Location entity scores:")
     print("Precision: ", scores_model["ents_per_type"]['LOC']['p'])
     print("Recall: ", scores_model["ents_per_type"]['LOC']['r'])
-    print("F1 Score: ", scores_model["ents_per_type"]['LOC']['r'])
+    print("F1 Score: ", scores_model["ents_per_type"]['LOC']['f'])
 
 
 

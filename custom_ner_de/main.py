@@ -24,9 +24,13 @@ def main():
                           word_remove=WORD_REMOVE,
                           person_names=PERSON_NAMES,
                           location_names=LOCATION_NAMES,
-                          epochs=1,
+                          epochs=100,
                           _local=True)
 
+    my_client.evaluate_model()
+
+    exit()
+    my_client.evaluate_model(model_path=MODEL_PATH)
     my_client.apply_model(text_url=TEXT_PATH,
                           _local=True)
 
