@@ -1,6 +1,6 @@
 # transkribus-custom-ner-de
 
-Custom named entity recognition (persons, locations) using spaCy for German texts annotated using Transkribus.
+Custom named entity recognition (persons, locations) using [spaCy](https://spacy.io/) for German texts annotated using [Transkribus](https://readcoop.eu/transkribus/?sc=Transkribus).
 
 Access this binder at the following URL
 
@@ -9,16 +9,20 @@ ADD URL
 ## Creator
 This software and sample dataset were created by the University of Basel's Research and Infrastructure Support RISE (rise@unibas.ch) in May 2022.
 
-## File structure
-Python module in [/transkribus_custom_ner_de](https://github.com/RISE-UNIBAS/transkribus-custom-ner-de/tree/main/transkribus_custum_ner_de)
+## File structure and data overview
+- Python module in [/transkribus_custom_ner_de](https://github.com/RISE-UNIBAS/transkribus-custom-ner-de/tree/main/transkribus_custum_ner_de).
 
-Documentation in [/docs](https://github.com/RISE-UNIBAS/transkribus-custom-ner-de/tree/main/docs) 
+- Documentation in [/docs](https://github.com/RISE-UNIBAS/transkribus-custom-ner-de/tree/main/docs).
 
-Sample data set in [/sample](https://github.com/RISE-UNIBAS/transkribus-custom-ner-de/tree/main/sample)
+- Sample data set in [/sample](https://github.com/RISE-UNIBAS/transkribus-custom-ner-de/tree/main/sample). The input data stem from the digital collection "Stenographisches Protokoll der Verhandlungen des ... Zionisten-Kongresses ... in ..." (ZDB mark: 2176334-3, persistent link: https://sammlungen.ub.uni-frankfurt.de/cm/periodical/titleinfo/3476254) provided by the Goethe University Frankfurt
+  - [/sample/gold_standard.zip](https://github.com/RISE-UNIBAS/transkribus-custom-ner-de/tree/main/sample/gold_standard.zip) is the protocol of 1897, automatically segmented and transcribed using PyLaya Transkribus Print M1 without manual corrections, manually annotated with `person` and `place` labels, exported as PAGE XML Zip file.
+  - [/sample/text_unanalyzed.txt](https://github.com/RISE-UNIBAS/transkribus-custom-ner-de/tree/main/sample/text_unanalyzed.txt) is the protocol of 1899, automatically segmented and transcribed using PyLaya Transkribus Print M1 without manual corrections, exported as plain text file.
 
-Tests in [/tests](https://github.com/RISE-UNIBAS/transkribus-custom-ner-de/tree/main/tests)
+- Tests in [/tests](https://github.com/RISE-UNIBAS/transkribus-custom-ner-de/tree/main/tests).
 
 ## Tutorial
+
+This tutorial shows how to get from a document in Transkribus to a custom NER model. 
 
 ### First step: prepare your documents for training in Transkribus
 
