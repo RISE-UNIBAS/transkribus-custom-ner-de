@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module transkribus_custom_ner_de.train</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="transkribus_custom_ner_de.html"><font color="#ffffff">transkribus_custom_ner_de</font></a>.train</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href="..">index</a><br><a href="file:c%3A%5Cusers%5Chinder0000%5Cpycharmprojects%5Ctranskribus-custom-ner-de%5Ctranskribus_custom_ner_de%5Ctrain.py">c:\users\hinder0000\pycharmprojects\transkribus-custom-ner-de\transkribus_custom_ner_de\train.py</a></font></td></tr></table>
+    <p><tt>train.py<br>
+&nbsp;<br>
+Function&nbsp;to&nbsp;train&nbsp;a&nbsp;spaCy&nbsp;NER&nbsp;model&nbsp;on&nbsp;previously&nbsp;extracted&nbsp;entities.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="os.html">os</a><br>
+</td><td width="25%" valign=top><a href="random.html">random</a><br>
+</td><td width="25%" valign=top><a href="spacy.html">spacy</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-custom_ner_training"><strong>custom_ner_training</strong></a>(gold_standard: List[tuple], save_dir: str, person_names: List[str] = None, location_names: List[str] = None, epochs: int = 100)</dt><dd><tt>Train&nbsp;a&nbsp;spaCy&nbsp;NER&nbsp;model&nbsp;on&nbsp;previously&nbsp;extracted&nbsp;entities.<br>
+&nbsp;<br>
+:param&nbsp;gold_standard:&nbsp;gold&nbsp;standard&nbsp;as&nbsp;defined&nbsp;by&nbsp;spaCy<br>
+:param&nbsp;save_dir:&nbsp;complete&nbsp;path&nbsp;to&nbsp;directory&nbsp;where&nbsp;model&nbsp;is&nbsp;saved<br>
+:param&nbsp;person_names:&nbsp;person&nbsp;names&nbsp;to&nbsp;be&nbsp;included&nbsp;for&nbsp;entity&nbsp;ruler,&nbsp;defaults&nbsp;to&nbsp;None<br>
+:param&nbsp;location_names:&nbsp;location&nbsp;names&nbsp;to&nbsp;be&nbsp;included&nbsp;for&nbsp;entity&nbsp;ruler,&nbsp;defaults&nbsp;to&nbsp;None<br>
+:param&nbsp;epochs:&nbsp;number&nbsp;of&nbsp;training&nbsp;epochs,&nbsp;defaults&nbsp;to&nbsp;100</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>List</strong> = typing.List<br>
+<strong>print_function</strong> = _Feature((2, 6, 0, 'alpha', 2), (3, 0, 0, 'alpha', 0), 1048576)<br>
+<strong>unicode_literals</strong> = _Feature((2, 6, 0, 'alpha', 2), (3, 0, 0, 'alpha', 0), 2097152)</td></tr></table>
+</body></html>
