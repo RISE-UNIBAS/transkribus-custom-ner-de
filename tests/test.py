@@ -4,7 +4,7 @@ Unittest. """
 
 import os.path
 import unittest
-from custom_ner_de.gold_standard import GoldStandard
+from transkribus_custom_ner_de.gold_standard import GoldStandard
 
 DIR = os.path.dirname(__file__)
 PARENT_DIR = os.path.dirname(os.path.dirname(__file__))

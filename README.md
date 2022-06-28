@@ -1,79 +1,50 @@
-# custom-ner-de
+# transkribus-custom-ner-de
 
-Custom named entity recognition (persons, locations) using spaCy for German texts annotated using Transkribus.
+Custom named entity recognition (persons, locations) using [spaCy](https://spacy.io/) for German texts annotated using [Transkribus](https://readcoop.eu/transkribus/?sc=Transkribus).
 
 Access this binder at the following URL
 
 ADD URL
 
 ## Creator
-This software and sample dataset were created by the University of Basel's Research and Infrastructure Support RISE (rise@unibas.ch) in May 2022. 
+This software and sample dataset were created by the University of Basel's Research and Infrastructure Support RISE (rise@unibas.ch) in May 2022.
 
 ## File structure and data overview
-Tutorial in /docs 
+- Python module in [/transkribus_custom_ner_de](https://github.com/RISE-UNIBAS/transkribus-custom-ner-de/tree/main/transkribus_custum_ner_de).
 
-Data in /files with
+- Documentation in [/docs](https://github.com/RISE-UNIBAS/transkribus-custom-ner-de/tree/main/docs).
 
-- text file as .txt of training and testing dataset
-- code as Python file (.py) and as Jupyternotebook (.ipynb) with comments as description
-- extracted entities from the .xml files to train the model as extensible markup language file (.xml)
-- the model 
-- extracted entities from the .xml files to train the model as text file (.txt)
-- requirements file with the required packages and dependencies to run the code
-- result of trained model based on training dataset as CSV file (.csv)
-- result of already pre-trained model of the spacy german large package as CSV file (.csv)
+- Sample data set in [/sample](https://github.com/RISE-UNIBAS/transkribus-custom-ner-de/tree/main/sample). The input data stem from the digital collection "Stenographisches Protokoll der Verhandlungen des ... Zionisten-Kongresses ... in ..." (ZDB mark: 2176334-3, persistent link: https://sammlungen.ub.uni-frankfurt.de/cm/periodical/titleinfo/3476254) provided by the Goethe University Frankfurt
+  - [/sample/gold_standard.zip](https://github.com/RISE-UNIBAS/transkribus-custom-ner-de/tree/main/sample/gold_standard.zip) is the protocol of 1897, automatically segmented and transcribed using PyLaya Transkribus Print M1 (model 39995) without manual corrections, manually annotated with `person` and `place` labels, exported as PAGE XML Zip file.
+  - [/sample/text_unanalyzed.txt](https://github.com/RISE-UNIBAS/transkribus-custom-ner-de/tree/main/sample/text_unanalyzed.txt) is the protocol of 1899, automatically segmented and transcribed using PyLaya Transkribus Print M1 (model 39995) without manual corrections, exported as plain text file.
 
-## Data processing
-- .xml files were extracted from the collection by importing the collection into Transkribus and then marking the PERSON (PER) and LOCATION (LOC) labels. Then the .xml files got exported (202) in an output file.
-This output file was then inserted into the python script, which then parses the XML files and extracts the labels to convert them into the spacy format.
+- Tests in [/tests](https://github.com/RISE-UNIBAS/transkribus-custom-ner-de/tree/main/tests).
 
-- Based on that the spacy format, a pipeline will be built on which the natural langauge processor (nlp) of the spacy package will be trained on. Therefore a "blank" model will be created within the python code where the trained information will be stored in.
+## Tutorial
 
-- After that the spacy model will be trained using the annotation and the entities 
-(Takes up to 3 hours depending on machine and on epochs/batches set)
+This tutorial shows how to get from a document in Transkribus to a custom NER model. 
 
-- Saving the trained model in the output directory for the analysis later on and testing the sample inference using the trained model
+### First step: prepare your documents for training in Transkribus
 
-## Data analysis
--The first step was to read the .txt-file (or each .txt-file) into Python using Python Version 3.7.9 to process the text and to have a basic identifier that can link any named entities back to the page they appeared on.
+This section explains how to prepare your documents using the [Transkribus Expert Client](https://readcoop.eu/transkribus/download/) in order to train a spaCy model for named entity recognition. Basic familiarity with the Transkribus Expert Client is assumed (see [READ-COOP](https://readcoop.eu/transkribus/resources/how-to-guides/) for tutorials). First the workflow is presented and then a detailed annotation sample is provided.
 
--spaCy: the "de_core_news_lg" model is used to parse all the texts and perform a named entity recognition. Every entity tagged as PER, and/or Location (LOC). In addition to that you can use the own created and trained model. The resulting dataframe was saved as a .csv file.
+#### Workflow
 
-- SpaCy has its own deep learning library called thinc used under the hood for different NLP models.#
-SpaCy uses a deep neural network based on CNN. Specifically for Named Entity Recognition, spacy uses:
+The preparation workflow involves five sub-steps:
 
-A transition based approach borrowed from shift-reduce parsers, which is described in the paper Neural Architectures for Named Entity Recognition.
+1. Create a collection in Transkribus and upload your documents. Automatically or manually segment and transcribe the documents, and carry out corrections if necessary. Be sure that you are happy with the result since there is no going back.
+2. Choose a representative sample of all documents. Think about the required sample size and make sure to include as much variety as possible.
+3. Define which entities you want to annotate and specify annotation guidelines.  Try to be explicit in recording all annotation decisions you are making. [!todo add link to annotation best practices]
+4. Annotate the representative sample. Try to ensure that annotations across all documents are consistent. Of course, annotation guidelines will likely have to be amended during the annotation process. Again, be sure that you are happy with the result since there is no going back.
+5. Export the annotated representative sample (again, there is no going back from here).
 
-A framework that's called "Embed. Encode. Attend. Predict".
+#### Sample annotation
 
-Embed: Words are embedded using a Bloom filter, which means that word hashes are kept as keys in the embedding dictionary, instead of the word itself. This maintains a more compact embeddings dictionary, with words potentially colliding and ending up with the same vector representations.
+https://readcoop.eu/transkribus/howto/how-to-enrich-transcribed-documents-with-mark-up/
 
-Encode: List of words is encoded into a sentence matrix, to take context into account. spaCy uses CNN for encoding.
+### Second step: train, evaluate, and apply a custom NER model using spaCy 
 
-Attend: Decide which parts are more informative given a query, and get problem specific representations.
-
-Predict: spaCy uses a multi layer perceptron for inference.
-
-## Results
-
-Model Performance
-
-- Model is able to identify full names of the person from text where spacy large model extracts partial names.
-- Some of the locations present were not part of the training data, which resulted in non extraction on test data but those locations
-    are detected by spacy large model.
-- There are several data points which overlaps the positions, which is possible cause for False postives.
-- Many full text are speaded over multiple lines which results in poor data labelling and affects model accuracy.
-- Accuracy_calculation.py can be used to calculate the precision/recall/f1-score of the custom-trained model and the already pre-trained model by spacy using the large 
-german package and compares those two results
-
-## Update
-- migrated all the code to spacy 3.3, because model comparison with spacy large model requires latest version.
-- there is minor update in label generation due to version upgrade.
-- Added lists to add persons and locations as a pattern using entity ruler.
-- Added list to ignore words in detection.
-- Added new script to calculate the various scores. First it gives overall scores then it also gives entity wise various scores.
-- Updated the requirements.txt with new library versions.
-- Added Jupyter notebook which covers everything with markdown descriptions.
+This section explains how to train, evaluate, and apply a custom NER model using spaCy with the annotated representative sample created in the previous section. For this, either the Binder [URL] or the `Client` class of the `transkribus_custom_ner_de` module can be employed.
 
 ## License
 

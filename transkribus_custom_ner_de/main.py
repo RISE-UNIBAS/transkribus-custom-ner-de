@@ -3,7 +3,7 @@
 Main app. """
 
 from __future__ import annotations
-from custom_ner_de.client import Client
+from transkribus_custom_ner_de.client import Client
 import os.path
 
 DIR = os.path.dirname(__file__)
@@ -13,7 +13,7 @@ PERSON_NAMES = ['Gustav Gottheil']
 LOCATION_NAMES = ['Boston', 'Roman']
 GOLD_STANDARD = PARENT_DIR + "/sample/gold_standard.zip"
 TEXT_PATH = PARENT_DIR + "/sample/text_unanalyzed.txt"
-MODEL_PATH = PARENT_DIR + "/sample/custom_ner_de_model"  # todo: add properly trained model
+MODEL_PATH = PARENT_DIR + "/sample/custom_ner_de_model"
 
 
 def main():

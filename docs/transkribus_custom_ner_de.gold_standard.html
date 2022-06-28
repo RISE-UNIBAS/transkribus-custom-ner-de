@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module transkribus_custom_ner_de.gold_standard</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="transkribus_custom_ner_de.html"><font color="#ffffff">transkribus_custom_ner_de</font></a>.gold_standard</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href="..">index</a><br><a href="file:c%3A%5Cusers%5Chinder0000%5Cpycharmprojects%5Ctranskribus-custom-ner-de%5Ctranskribus_custom_ner_de%5Cgold_standard.py">c:\users\hinder0000\pycharmprojects\transkribus-custom-ner-de\transkribus_custom_ner_de\gold_standard.py</a></font></td></tr></table>
+    <p><tt>gold_standard.py<br>
+&nbsp;<br>
+<a href="#GoldStandard">GoldStandard</a>&nbsp;class.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="xml.etree.ElementTree.html">xml.etree.ElementTree</a><br>
+</td><td width="25%" valign=top><a href="os.html">os</a><br>
+</td><td width="25%" valign=top><a href="tempfile.html">tempfile</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="transkribus_custom_ner_de.gold_standard.html#GoldStandard">GoldStandard</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="GoldStandard">class <strong>GoldStandard</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#GoldStandard">GoldStandard</a>(full:&nbsp;List[tuple]&nbsp;=&nbsp;None,&nbsp;training:&nbsp;List[tuple]&nbsp;=&nbsp;None,&nbsp;validation:&nbsp;List[tuple]&nbsp;=&nbsp;None)&nbsp;-&amp;gt;&nbsp;None<br>
+&nbsp;<br>
+A&nbsp;representation&nbsp;of&nbsp;a&nbsp;gold&nbsp;standard.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="GoldStandard-__eq__"><strong>__eq__</strong></a>(self, other)</dt></dl>
+
+<dl><dt><a name="GoldStandard-__init__"><strong>__init__</strong></a>(self, full: List[tuple] = None, training: List[tuple] = None, validation: List[tuple] = None) -&gt; None</dt></dl>
+
+<dl><dt><a name="GoldStandard-__repr__"><strong>__repr__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="GoldStandard-make"><strong>make</strong></a>(self, zip_path: str, save_path: str = None, word_remove: List[str] = None) -&gt; None</dt><dd><tt>Make&nbsp;full&nbsp;gold&nbsp;standard&nbsp;from&nbsp;Zip&nbsp;file.<br>
+&nbsp;<br>
+Zip&nbsp;file&nbsp;must&nbsp;be&nbsp;created&nbsp;by&nbsp;exporting&nbsp;annotated&nbsp;document&nbsp;from&nbsp;Transkribus&nbsp;as&nbsp;PAGE&nbsp;XML.<br>
+&nbsp;<br>
+:param&nbsp;zip_path:&nbsp;complete&nbsp;path&nbsp;to&nbsp;zip&nbsp;file&nbsp;including&nbsp;filename&nbsp;and&nbsp;.zip&nbsp;extension<br>
+:param&nbsp;save_path:&nbsp;complete&nbsp;path&nbsp;to&nbsp;save&nbsp;file&nbsp;including&nbsp;filename&nbsp;and&nbsp;.txt&nbsp;extension,&nbsp;defaults&nbsp;to&nbsp;None<br>
+:param&nbsp;word_remove:&nbsp;list&nbsp;of&nbsp;words&nbsp;to&nbsp;remove,&nbsp;defaults&nbsp;to&nbsp;None</tt></dd></dl>
+
+<dl><dt><a name="GoldStandard-split"><strong>split</strong></a>(self, training_size: int = 90) -&gt; None</dt><dd><tt>Split&nbsp;full&nbsp;gold&nbsp;standard&nbsp;into&nbsp;training&nbsp;and&nbsp;validation&nbsp;sets.<br>
+&nbsp;<br>
+:param&nbsp;training_size:&nbsp;size&nbsp;of&nbsp;validation&nbsp;set&nbsp;in&nbsp;percent,&nbsp;defaults&nbsp;to&nbsp;10</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__annotations__</strong> = {'full': typing.List[tuple], 'training': typing.List[tuple], 'validation': typing.List[tuple]}</dl>
+
+<dl><dt><strong>__dataclass_fields__</strong> = {'full': Field(name='full',type=typing.List[tuple],defaul...rue,metadata=mappingproxy({}),_field_type=_FIELD), 'training': Field(name='training',type=typing.List[tuple],de...rue,metadata=mappingproxy({}),_field_type=_FIELD), 'validation': Field(name='validation',type=typing.List[tuple],...rue,metadata=mappingproxy({}),_field_type=_FIELD)}</dl>
+
+<dl><dt><strong>__dataclass_params__</strong> = _DataclassParams(init=True,repr=True,eq=True,order=False,unsafe_hash=False,frozen=False)</dl>
+
+<dl><dt><strong>__hash__</strong> = None</dl>
+
+<dl><dt><strong>full</strong> = None</dl>
+
+<dl><dt><strong>training</strong> = None</dl>
+
+<dl><dt><strong>validation</strong> = None</dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>List</strong> = typing.List</td></tr></table>
+</body></html>
