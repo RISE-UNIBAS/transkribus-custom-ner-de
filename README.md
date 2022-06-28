@@ -1,7 +1,7 @@
 # transkribus-custom-ner-de
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/RISE-UNIBAS/transkribus-custom-ner-de/HEAD?labpath=interactive.ipynb)
 
-Custom named entity recognition (persons, locations) using [spaCy](https://spacy.io/) for German texts annotated using [Transkribus](https://readcoop.eu/transkribus/?sc=Transkribus).
+Custom named entity recognition (persons, locations) using [spaCy](https://spacy.io/) for German texts annotated in [Transkribus](https://readcoop.eu/transkribus/?sc=Transkribus).
 
 Access this binder at the following URL
 
