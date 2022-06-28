@@ -3,7 +3,7 @@
 GoldStandard class.
 """
 
-from custom_ner_de.utility import Utility
+from transkribus_custom_ner_de.utility import Utility
 from dataclasses import dataclass
 from random import randint
 from typing import List

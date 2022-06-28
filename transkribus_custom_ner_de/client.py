@@ -3,11 +3,11 @@
 Client class ."""
 
 from __future__ import annotations
-from custom_ner_de.gold_standard import GoldStandard
-from custom_ner_de.evaluate import evaluate_model
-from custom_ner_de.predict import predict
-from custom_ner_de.train import custom_ner_training
-from custom_ner_de.utility import Utility
+from transkribus_custom_ner_de.gold_standard import GoldStandard
+from transkribus_custom_ner_de.evaluate import evaluate_model
+from transkribus_custom_ner_de.predict import predict
+from transkribus_custom_ner_de.train import custom_ner_training
+from transkribus_custom_ner_de.utility import Utility
 from datetime import datetime
 from os import path
 from pandas import DataFrame, Series
