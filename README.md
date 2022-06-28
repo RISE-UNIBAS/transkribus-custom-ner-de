@@ -15,8 +15,8 @@ This software and sample dataset were created by the University of Basel's Resea
 - Documentation in [/docs](https://github.com/RISE-UNIBAS/transkribus-custom-ner-de/tree/main/docs).
 
 - Sample data set in [/sample](https://github.com/RISE-UNIBAS/transkribus-custom-ner-de/tree/main/sample). The input data stem from the digital collection "Stenographisches Protokoll der Verhandlungen des ... Zionisten-Kongresses ... in ..." (ZDB mark: 2176334-3, persistent link: https://sammlungen.ub.uni-frankfurt.de/cm/periodical/titleinfo/3476254) provided by the Goethe University Frankfurt
-  - [/sample/gold_standard.zip](https://github.com/RISE-UNIBAS/transkribus-custom-ner-de/tree/main/sample/gold_standard.zip) is the protocol of 1897, automatically segmented and transcribed using PyLaya Transkribus Print M1 without manual corrections, manually annotated with `person` and `place` labels, exported as PAGE XML Zip file.
-  - [/sample/text_unanalyzed.txt](https://github.com/RISE-UNIBAS/transkribus-custom-ner-de/tree/main/sample/text_unanalyzed.txt) is the protocol of 1899, automatically segmented and transcribed using PyLaya Transkribus Print M1 without manual corrections, exported as plain text file.
+  - [/sample/gold_standard.zip](https://github.com/RISE-UNIBAS/transkribus-custom-ner-de/tree/main/sample/gold_standard.zip) is the protocol of 1897, automatically segmented and transcribed using PyLaya Transkribus Print M1 (model 39995) without manual corrections, manually annotated with `person` and `place` labels, exported as PAGE XML Zip file.
+  - [/sample/text_unanalyzed.txt](https://github.com/RISE-UNIBAS/transkribus-custom-ner-de/tree/main/sample/text_unanalyzed.txt) is the protocol of 1899, automatically segmented and transcribed using PyLaya Transkribus Print M1 (model 39995) without manual corrections, exported as plain text file.
 
 - Tests in [/tests](https://github.com/RISE-UNIBAS/transkribus-custom-ner-de/tree/main/tests).
 
