@@ -3,12 +3,12 @@
 Function to predict named entities for text based on (custom) trained spaCy model.
 """
 
+from spacy import Language
 from typing import List
 from pandas import DataFrame
-import spacy
 
 
-def predict(model: spacy.Language,
+def predict(model: Language,
             dataframe: DataFrame,
             word_remove: List[str] = None) -> tuple:
     """ Return persons and locations extracted from text using (custom) trained spaCy model for NER.

@@ -3,9 +3,6 @@
 Client class ."""
 
 from __future__ import annotations
-
-import os.path
-
 from custom_ner_de.gold_standard import GoldStandard
 from custom_ner_de.evaluate import evaluate_model
 from custom_ner_de.predict import predict
@@ -19,6 +16,7 @@ from spacy import Language
 from tempfile import TemporaryDirectory, TemporaryFile
 from typing import List
 from warnings import filterwarnings
+import os.path
 import shutil
 import spacy
 import re

@@ -14,6 +14,8 @@ import xml.etree.ElementTree as ET
 
 @dataclass
 class GoldStandard:
+    """ A representation of a gold standard. """
+
     full: List[tuple] = None
     training: List[tuple] = None
     validation: List[tuple] = None
@@ -130,4 +132,4 @@ class GoldStandard:
             self.validation.append(full_copy[line])
             del full_copy[line]
         self.training = full_copy
-        print(f"done (training: {len(self.training)}, validation: {len(self.validation)}).")
+        print(f"done (training: {len(self.training)} lines, validation: {len(self.validation)} lines).")

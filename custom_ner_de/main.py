@@ -11,8 +11,8 @@ PARENT_DIR = os.path.dirname(os.path.dirname(__file__))
 WORD_REMOVE = ["BASEL", "HÃ¤ndeklatschen"]
 PERSON_NAMES = ['Gustav Gottheil']
 LOCATION_NAMES = ['Boston', 'Roman']
-ZIP_PATH = PARENT_DIR + "/sample/gold_standard.zip"
-TEXT_PATH = PARENT_DIR + "/sample/text_to_be_analyzed.txt"
+GOLD_STANDARD = PARENT_DIR + "/sample/gold_standard.zip"
+TEXT_PATH = PARENT_DIR + "/sample/text_unanalyzed.txt"
 MODEL_PATH = PARENT_DIR + "/sample/custom_ner_de_model"  # todo: add properly trained model
 
 
@@ -20,11 +20,11 @@ def main():
     """ Run the app on the sample data. """
 
     my_client = Client()
-    my_client.train_model(zip_url=ZIP_PATH,
+    my_client.train_model(zip_url=GOLD_STANDARD,
                           word_remove=WORD_REMOVE,
                           person_names=PERSON_NAMES,
                           location_names=LOCATION_NAMES,
-                          epochs=1,
+                          epochs=100,
                           _local=True)
     my_client.save_model()
     my_client.evaluate_model()
