@@ -35,4 +35,5 @@ def main():
     my_client.save_result2csv()
 
 
-main()
+if __name__ == "__main__":
+    main()
