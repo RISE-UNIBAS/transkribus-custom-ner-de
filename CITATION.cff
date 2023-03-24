@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+title: RISE-UNIBAS/transkribus-custom-ner-de
+message: 'If you use this dataset, please cite it as below.'
+type: software
+authors:
+  - family-names: Hindermann
+    given-names: Maximilian
+    orcid: 'https://orcid.org/0000-0002-9337-4655'
+  - given-names: Vincent
+    family-names: Ochs
+    orcid: 'https://orcid.org/0000-0003-0237-7496'
+url: >-
+  https://github.com/RISE-UNIBAS/transkribus-custom-ner-de
+abstract: >-
+  Custom named entity recognition (persons, locations) using spaCy for German texts annotated in Transkribus. Also available as Jupyter notebook on Binder.
+keywords:
+  - Transkribus
+  - Python
+  - spaCy
+  - named entity recognition
+  - training materials
+  - World Zionist Congress
+  - SSH
+license: CC-BY-4.0
+version: 0.1.0
+date-released: '2023-03-24'
