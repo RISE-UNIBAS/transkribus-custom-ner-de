@@ -1,5 +1,4 @@
 # transkribus-custom-ner-de
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/RISE-UNIBAS/transkribus-custom-ner-de/HEAD?labpath=interactive.ipynb)
 
 Custom named entity recognition (persons, locations) using [spaCy](https://spacy.io/) for German texts annotated in [Transkribus](https://readcoop.eu/transkribus/?sc=Transkribus).
 
@@ -7,10 +6,14 @@ Access this binder at the following URL
 
 https://mybinder.org/v2/gh/RISE-UNIBAS/transkribus-custom-ner-de/HEAD?labpath=interactive.ipynb
 
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/RISE-UNIBAS/transkribus-custom-ner-de/HEAD?labpath=interactive.ipynb)
+
 ## Creator
+
 This software and sample dataset were created by the University of Basel's Research and Infrastructure Support RISE (rise@unibas.ch) in May 2022.
 
 ## File structure and data overview
+
 - Python module in [/transkribus_custom_ner_de](https://github.com/RISE-UNIBAS/transkribus-custom-ner-de/tree/main/transkribus_custum_ner_de).
 
 - Documentation in [/docs](https://github.com/RISE-UNIBAS/transkribus-custom-ner-de/tree/main/docs).
