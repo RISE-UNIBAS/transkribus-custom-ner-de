@@ -6,7 +6,7 @@ Access this binder at the following URL
 
 https://mybinder.org/v2/gh/RISE-UNIBAS/transkribus-custom-ner-de/HEAD?labpath=interactive.ipynb
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/RISE-UNIBAS/transkribus-custom-ner-de/HEAD?labpath=interactive.ipynb)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7766239.svg)](https://doi.org/10.5281/zenodo.7766239) [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/RISE-UNIBAS/transkribus-custom-ner-de/HEAD?labpath=interactive.ipynb)
 
 ## Creator
 
